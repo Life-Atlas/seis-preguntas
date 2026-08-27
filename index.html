@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seis preguntas · Life Atlas</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Cómo trabajas hoy, antes de que exista la plataforma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#10171A; --petrol:#14453F; --mustard:#B0740F;
+    --slate:#5C6B6B; --rule:#E2DFD6; --card:#FFFFFF; --sunk:#F2F0EA;
+    --display:"Fraunces",Georgia,serif;
+    --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0D1413; --ink:#E9E7E0; --petrol:#7FBEAE; --mustard:#E0A845;
+      --slate:#96A5A2; --rule:#22302D; --card:#131C1A; --sunk:#0A1110;
+    }
+  }
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-size:16px;line-height:1.6;margin:0;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:42rem;margin:0 auto;padding:3rem 1.25rem 6rem}
+  .eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--mustard);margin:0 0 .9rem}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,5vw,2.5rem);
+    line-height:1.1;margin:0 0 .4rem;color:var(--petrol);text-wrap:balance}
+  .sub{font-family:var(--display);font-style:italic;font-size:1.05rem;
+    color:var(--slate);margin:0 0 1.4rem}
+  .lede{color:var(--slate);margin:0 0 1.4rem}
+  .privacy{background:var(--sunk);border-left:3px solid var(--petrol);
+    padding:.9rem 1.1rem;margin:0 0 2.5rem;font-size:.9rem;color:var(--slate)}
+  .privacy strong{color:var(--ink)}
+  .q{margin-bottom:1.9rem}
+  .q label{display:block;font-weight:600;font-size:1rem;margin-bottom:.15rem}
+  .q .en{display:block;font-size:.82rem;color:var(--slate);font-style:italic;
+    margin-bottom:.55rem}
+  .q .n{font-family:var(--mono);font-size:.72rem;color:var(--mustard);
+    margin-right:.5rem}
+  .q .hint{display:block;font-size:.82rem;color:var(--slate);margin-top:.35rem}
+  textarea,input[type=text]{
+    width:100%;font-family:var(--body);font-size:.95rem;color:var(--ink);
+    background:var(--card);border:1px solid var(--rule);border-radius:2px;
+    padding:.7rem .8rem;line-height:1.55;resize:vertical}
+  textarea{min-height:4.5rem}
+  textarea:focus,input:focus{outline:2px solid var(--petrol);outline-offset:1px;
+    border-color:var(--petrol)}
+  .stage-intro{margin:3rem 0 1rem;padding-top:1.5rem;border-top:2px solid var(--petrol)}
+  .stage-intro h2{font-family:var(--display);font-size:1.25rem;color:var(--petrol);margin:0 0 .3rem}
+  .stage-intro p{margin:0;color:var(--slate);font-size:.92rem}
+  details{border:1px solid var(--rule);border-radius:2px;margin-bottom:.55rem;background:var(--card)}
+  details[open]{border-color:var(--petrol)}
+  summary{cursor:pointer;padding:.85rem 1rem;font-weight:600;font-size:.95rem;
+    list-style:none;display:flex;align-items:baseline;gap:.65rem}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"+";font-family:var(--mono);color:var(--mustard);font-weight:500;flex:none}
+  details[open] summary::before{content:"–"}
+  summary .cnt{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--slate);font-weight:400}
+  summary .lbl-en{font-weight:400;font-size:.8rem;color:var(--slate);font-style:italic}
+  .stage-body{padding:.4rem 1rem 1rem}
+  .who{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:2.5rem 0 1.6rem}
+  @media(max-width:520px){.who{grid-template-columns:1fr}}
+  .who label{display:block;font-size:.8rem;color:var(--slate);margin-bottom:.3rem}
+  .actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.9rem}
+  button{font-family:var(--body);font-size:.95rem;font-weight:600;color:#FBFAF7;
+    background:var(--petrol);border:0;border-radius:2px;padding:.75rem 1.4rem;cursor:pointer}
+  button.ghost{background:transparent;color:var(--petrol);border:1px solid var(--petrol)}
+  button:hover{opacity:.9}
+  .status{font-size:.88rem;color:var(--slate);min-height:1.3em}
+  .status.good{color:var(--petrol);font-weight:600}
+  .saved-note{font-family:var(--mono);font-size:.72rem;color:var(--slate);margin-top:1.5rem}
+  footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--rule);font-size:.82rem;color:var(--slate)}
+  footer a{color:var(--petrol)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Life Atlas · Coordinación deportiva</p>
+  <h1>Seis preguntas</h1>
+  <p class="sub">Cómo trabajas hoy, antes de que exista la plataforma</p>
+  <p class="lede">Contesta lo que sepas. Lo que no sepas también sirve &mdash; dice
+  dónde hay que mirar. Con las seis primeras alcanza; lo demás está abajo por
+  etapas, por si hay tiempo.</p>
+
+  <p class="privacy"><strong>Tus respuestas no salen de este navegador.</strong>
+  Esta página no envía nada a ningún servidor. Se guardan en tu propio equipo
+  mientras escribes, así que puedes cerrar y volver. Cuando termines, tú decides
+  si las copias o las mandas por correo.</p>
+
+  <div id="questions">
+    <div class="q">
+      <label for="q1"><span class="n">1</span>¿Qué tiene que ser cierto dentro de un año para decir que salió bien?</label>
+      <span class="en">What has to be true a year from now to call this a success?</span>
+      <textarea id="q1" data-label="Un año — qué tiene que ser cierto"></textarea>
+    </div>
+    <div class="q">
+      <label for="q2"><span class="n">2</span>Presupuesto y contratación: ¿cómo se asignan hoy los recursos, y quién administra los convenios?</label>
+      <span class="en">Budget and contracting: how are resources allocated today, and who administers the agreements?</span>
+      <textarea id="q2" data-label="Presupuesto y contratación"></textarea>
+    </div>
+    <div class="q">
+      <label for="q3"><span class="n">3</span>¿Quién decide qué, y quién convoca la reunión formal?</label>
+      <span class="en">Who decides what, and who convenes the formal meeting?</span>
+      <textarea id="q3" data-label="Quién decide, quién convoca"></textarea>
+    </div>
+    <div class="q">
+      <label for="q4"><span class="n">4</span>El centro: ¿qué mandato tiene, de quién depende, y cuál es el cronograma real?</label>
+      <span class="en">The centre: what is its mandate, who does it report to, and what is the real timeline?</span>
+      <textarea id="q4" data-label="El centro — mandato y cronograma"></textarea>
+    </div>
+    <div class="q">
+      <label for="q5"><span class="n">5</span>¿Qué se mide hoy para decidir si un deportista está listo para competir, y quién toma esa decisión?</label>
+      <span class="en">What is measured today to decide whether an athlete is ready to compete, and who makes that call?</span>
+      <textarea id="q5" data-label="Listo para competir — qué se mide, quién decide"></textarea>
+    </div>
+    <div class="q">
+      <label for="q6"><span class="n">6</span>Con menores de edad: ¿quién autoriza hoy que se recoja información, y cómo queda registrado ese permiso?</label>
+      <span class="en">With minors: who authorises data collection today, and how is that permission recorded?</span>
+      <textarea id="q6" data-label="Menores — quién autoriza"></textarea>
+    </div>
+
+    <div class="stage-intro">
+      <h2>Si hay tiempo</h2>
+      <p>Siete etapas más, cada una de tres o cuatro preguntas. Abre las que quieras
+      y deja el resto cerrado. Nada de esto es obligatorio.</p>
+    </div>
+
+    <details>
+      <summary>Etapa 2 &mdash; La institución <span class="lbl-en">The institution</span><span class="cnt">4</span></summary>
+      <div class="stage-body">
+        <div class="q"><label for="q7">Subvenciones: ¿qué fondos (departamentales, nacionales, internacionales) existen para deporte, salud mental y bienestar?</label>
+          <textarea id="q7" data-label="Subvenciones y fondos"></textarea></div>
+        <div class="q"><label for="q8">El cargo: ¿qué abarca la posición, qué se puede decidir directamente, y qué requiere aprobación de otros?</label>
+          <textarea id="q8" data-label="El cargo — alcance y autoridad"></textarea></div>
+        <div class="q"><label for="q9">Programa deportivo: ¿qué disciplinas, cuántos deportistas activos por disciplina, qué calendario de eventos?</label>
+          <textarea id="q9" data-label="Programa deportivo"></textarea></div>
+        <div class="q"><label for="q10">Infraestructura digital: ¿conectividad, dispositivos disponibles, puntos de acceso para deportistas y familias?</label>
+          <textarea id="q10" data-label="Infraestructura digital"></textarea></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Etapa 3 &mdash; Las decisiones del día a día <span class="lbl-en">Daily decisions</span><span class="cnt">4</span></summary>
+      <div class="stage-body">
+        <div class="q"><label for="q11">¿Qué se espera los primeros cuatro meses, y qué al cabo de un año?</label>
+          <span class="hint">Si las dos respuestas son distintas, esa diferencia dice mucho.</span>
+          <textarea id="q11" data-label="Cuatro meses contra un año"></textarea></div>
+        <div class="q"><label for="q12">Las tres decisiones que se toman con más frecuencia sobre un deportista, y cada cuánto &mdash; diario, semanal, por concentración.</label>
+          <textarea id="q12" data-label="Las tres decisiones más frecuentes"></textarea></div>
+        <div class="q"><label for="q13">¿Cuál de esas se toma hoy con menos información de la que se quisiera?</label>
+          <span class="hint">Si hay una que quita el sueño, esa.</span>
+          <textarea id="q13" data-label="La decisión con menos información"></textarea></div>
+        <div class="q"><label for="q14">Cuando se recomienda algo &mdash; carga, descanso, apoyo psicológico &mdash; ¿quién tiene que estar de acuerdo antes de que se aplique?</label>
+          <textarea id="q14" data-label="Quién debe aprobar una recomendación"></textarea></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Etapa 4 &mdash; Lo que ya se sabe ver <span class="lbl-en">Tacit judgement</span><span class="cnt">3</span></summary>
+      <div class="stage-body">
+        <div class="q"><label for="q15">¿Qué se ve en un deportista que no aparece en ningún formulario? Lo que se sabe por experiencia y nadie ha escrito nunca.</label>
+          <textarea id="q15" data-label="Lo que se ve y nadie escribe"></textarea></div>
+        <div class="q"><label for="q16">¿Cómo se usan hoy DISC y VAK en la práctica? No la teoría &mdash; el momento concreto en que se mira el perfil y se cambia algo por lo que dice.</label>
+          <textarea id="q16" data-label="DISC y VAK en la práctica"></textarea></div>
+        <div class="q"><label for="q17">¿Qué señal temprana ha hecho acertar antes? ¿Y cuál ha engañado?</label>
+          <textarea id="q17" data-label="Señales tempranas — aciertos y engaños"></textarea></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Etapa 5 &mdash; Cómo se captura hoy <span class="lbl-en">How it is captured today</span><span class="cnt">4</span></summary>
+      <div class="stage-body">
+        <div class="q"><label for="q18">¿Qué formularios, tests o cuestionarios se usan hoy?</label>
+          <span class="hint">Descríbelos aquí y mándalos por correo aunque estén a medias, en papel o en un Excel desordenado. El desorden es información, no un problema.</span>
+          <textarea id="q18" data-label="Formularios y tests actuales"></textarea></div>
+        <div class="q"><label for="q19">¿Cuánto tiempo a la semana se pasa moviendo datos de un lado a otro &mdash; transcribiendo, copiando, resumiendo para alguien más?</label>
+          <textarea id="q19" data-label="Tiempo moviendo datos"></textarea></div>
+        <div class="q"><label for="q20">¿Por dónde llega hoy la información de un deportista? Correo, WhatsApp, conversación en el campo, informe del médico.</label>
+          <textarea id="q20" data-label="Canales de entrada"></textarea></div>
+        <div class="q"><label for="q21">¿Qué pasa con esa información cuando un deportista cambia de categoría, o cuando quien la tiene no está?</label>
+          <textarea id="q21" data-label="Qué pasa en las transiciones"></textarea></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Etapa 6 &mdash; Los datos que ya existen <span class="lbl-en">Data that already exists</span><span class="cnt">3</span></summary>
+      <div class="stage-body">
+        <div class="q"><label for="q22">Los chalecos y sensores que ya existen: ¿quién los opera, quién recibe la salida, y alguien la usa para decidir algo?</label>
+          <textarea id="q22" data-label="Sensores existentes"></textarea></div>
+        <div class="q"><label for="q23">¿Los deportistas usan reloj, banda o app por su cuenta? ¿Cuáles, y llega algo de eso a ustedes?</label>
+          <textarea id="q23" data-label="Wearables propios"></textarea></div>
+        <div class="q"><label for="q24">En edades de 13 a 17: ¿qué se registra hoy sobre crecimiento &mdash; estatura, peso, fecha de medición?</label>
+          <span class="hint">Un marco de puerta y una báscula bastan. A esa edad el crecimiento explica más que casi cualquier sensor.</span>
+          <textarea id="q24" data-label="Crecimiento en 13–17"></textarea></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Etapa 7 &mdash; Quién es quién <span class="lbl-en">Who is who</span><span class="cnt">3</span></summary>
+      <div class="stage-body">
+        <div class="q"><label for="q25">¿Quién está alrededor de un deportista &mdash; entrenador, preparador físico, médico, fisioterapeuta, la familia? ¿Quién le reporta a quién?</label>
+          <textarea id="q25" data-label="Quién rodea al deportista"></textarea></div>
+        <div class="q"><label for="q26">¿Cuántos deportistas en total, y cuántos se ven personalmente en una semana normal?</label>
+          <textarea id="q26" data-label="Cuántos deportistas"></textarea></div>
+        <div class="q"><label for="q27">¿Hay alguien de fuera que opine sobre un deportista &mdash; un especialista, un club, una universidad en el exterior?</label>
+          <textarea id="q27" data-label="Opiniones externas"></textarea></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Etapa 8 &mdash; Los límites <span class="lbl-en">Boundaries</span><span class="cnt">3</span></summary>
+      <div class="stage-body">
+        <div class="q"><label for="q28">¿Qué información sobre un deportista <em>no</em> debería ver un entrenador? ¿Y un deportista sobre otro?</label>
+          <textarea id="q28" data-label="Qué no debe ver quién"></textarea></div>
+        <div class="q"><label for="q29">Si un deportista o su familia pidiera ver todo lo que hay registrado sobre él, ¿se podría hoy? ¿Y borrarlo?</label>
+          <textarea id="q29" data-label="Acceso y borrado"></textarea></div>
+        <div class="q"><label for="q30">¿Hay algo que se exija por contrato o por reglamento sobre datos de los deportistas que deba conocerse antes de proponer nada?</label>
+          <textarea id="q30" data-label="Exigencias contractuales o de reglamento"></textarea></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="who">
+    <div><label for="who-name">Nombre / Name</label><input type="text" id="who-name"></div>
+    <div><label for="who-role">Rol / Role</label><input type="text" id="who-role"></div>
+  </div>
+
+  <div class="actions">
+    <button id="copy" type="button">Copiar todo</button>
+    <button id="mail" class="ghost" type="button">Abrir en el correo</button>
+    <button id="download" class="ghost" type="button">Descargar</button>
+    <button id="clear" class="ghost" type="button">Borrar</button>
+  </div>
+  <p class="status" id="status"></p>
+  <p class="saved-note" id="saved-note"></p>
+
+  <footer>
+    Copia el texto y mándalo por correo o WhatsApp a
+    <a href="mailto:ceo@winniio.io">ceo@winniio.io</a>. Con lo que llegue armo la
+    propuesta: qué hace la plataforma el primer mes, qué no hace todavía, y quién
+    decide qué.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var KEY = "la-seis-preguntas:v1";
+  var TO = "ceo@winniio.io";
+
+  var fields = Array.prototype.slice.call(document.querySelectorAll("#questions textarea[id]"));
+  var nameEl = document.getElementById("who-name");
+  var roleEl = document.getElementById("who-role");
+  var statusEl = document.getElementById("status");
+  var savedNote = document.getElementById("saved-note");
+
+  function say(msg, good) {
+    statusEl.textContent = msg;
+    statusEl.className = good ? "status good" : "status";
+  }
+
+  // ---- local persistence -------------------------------------------------
+  // Storage can throw outright in some contexts (private windows, blocked
+  // site data), so every read and write is guarded and the page works with
+  // no stored value at all.
+  function save() {
+    var data = { name: nameEl.value, role: roleEl.value, when: new Date().toISOString(), a: {} };
+    fields.forEach(function (t) { if (t.value.trim()) data.a[t.id] = t.value; });
+    try {
+      localStorage.setItem(KEY, JSON.stringify(data));
+      savedNote.textContent = "Guardado en este navegador · " +
+        Object.keys(data.a).length + " de " + fields.length + " respuestas";
+    } catch (e) {
+      savedNote.textContent = "Este navegador no permite guardar. Copia el texto antes de cerrar.";
+    }
+  }
+
+  function restore() {
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) { return; }
+    if (!raw) return;
+    var d;
+    try { d = JSON.parse(raw); } catch (e) { return; }
+    if (d.name) nameEl.value = d.name;
+    if (d.role) roleEl.value = d.role;
+    var n = 0;
+    fields.forEach(function (t) {
+      if (d.a && d.a[t.id]) {
+        t.value = d.a[t.id]; n++;
+        var box = t.closest("details"); if (box) box.open = true;
+      }
+    });
+    if (n) {
+      say("Recuperamos " + n + " respuesta" + (n === 1 ? "" : "s") + " de la última vez.", true);
+      savedNote.textContent = "Guardado en este navegador · " + n + " de " + fields.length + " respuestas";
+    }
+  }
+
+  var timer = null;
+  function scheduleSave() { clearTimeout(timer); timer = setTimeout(save, 600); }
+  fields.concat([nameEl, roleEl]).forEach(function (el) {
+    el.addEventListener("input", scheduleSave);
+  });
+
+  // ---- output ------------------------------------------------------------
+  function asText() {
+    var out = ["Seis preguntas — Life Atlas", ""];
+    var who = nameEl.value.trim();
+    if (roleEl.value.trim()) who += (who ? " · " : "") + roleEl.value.trim();
+    if (who) out.push(who);
+    out.push(new Date().toISOString().slice(0, 10), "");
+    var n = 0;
+    fields.forEach(function (t) {
+      var v = t.value.trim();
+      if (!v) return;
+      n++;
+      out.push(t.getAttribute("data-label"), v, "");
+    });
+    if (!n) return null;
+    return out.join("\n");
+  }
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var text = asText();
+    if (!text) { say("Escribe al menos una respuesta.", false); return; }
+    function fallback() {
+      // execCommand is deprecated but is the only path on pages served
+      // without a secure context or where the clipboard permission is denied.
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      say(ok ? "Copiado. Pégalo en un correo o WhatsApp a " + TO
+             : "No se pudo copiar. Usa Descargar.", ok);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () {
+        say("Copiado. Pégalo en un correo o WhatsApp a " + TO, true);
+      }, fallback);
+    } else { fallback(); }
+  });
+
+  document.getElementById("mail").addEventListener("click", function () {
+    var text = asText();
+    if (!text) { say("Escribe al menos una respuesta.", false); return; }
+    var href = "mailto:" + TO + "?subject=" + encodeURIComponent("Seis preguntas — respuestas") +
+               "&body=" + encodeURIComponent(text);
+    // Mail clients truncate very long mailto bodies. Say so rather than let
+    // answers disappear silently between the page and the draft.
+    if (href.length > 1800) {
+      say("Son muchas respuestas para abrir el correo directamente. Usa Copiar todo o Descargar.", false);
+      return;
+    }
+    window.location.href = href;
+    say("Abriendo tu correo…", true);
+  });
+
+  document.getElementById("download").addEventListener("click", function () {
+    var text = asText();
+    if (!text) { say("Escribe al menos una respuesta.", false); return; }
+    var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "seis-preguntas.txt";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    say("Descargado. Adjúntalo en un correo a " + TO, true);
+  });
+
+  document.getElementById("clear").addEventListener("click", function () {
+    fields.forEach(function (t) { t.value = ""; });
+    nameEl.value = ""; roleEl.value = "";
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    savedNote.textContent = "";
+    say("Borrado.", false);
+  });
+
+  restore();
+})();
+</script>
+</body>
+</html>
