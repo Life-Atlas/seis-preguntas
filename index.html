@@ -26,7 +26,12 @@
   *{box-sizing:border-box}
   body{background:var(--paper);color:var(--ink);font-family:var(--body);
     font-size:16px;line-height:1.6;margin:0;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:42rem;margin:0 auto;padding:3rem 1.25rem 6rem}
+  .wrap{max-width:42rem;margin:0 auto;padding:1.5rem 1.25rem 6rem}
+  .topbar{display:flex;justify-content:flex-end;margin-bottom:1.6rem}
+  .langs{display:inline-flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+  .langs button{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;
+    padding:.4rem .8rem;border:0;background:transparent;color:var(--slate);cursor:pointer}
+  .langs button[aria-pressed="true"]{background:var(--petrol);color:#FBFAF7}
   .eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;
     text-transform:uppercase;color:var(--mustard);margin:0 0 .9rem}
   h1{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,5vw,2.5rem);
@@ -39,18 +44,18 @@
   .privacy strong{color:var(--ink)}
   .q{margin-bottom:1.9rem}
   .q label{display:block;font-weight:600;font-size:1rem;margin-bottom:.15rem}
-  .q .en{display:block;font-size:.82rem;color:var(--slate);font-style:italic;
+  .q .gloss{display:block;font-size:.82rem;color:var(--slate);font-style:italic;
     margin-bottom:.55rem}
-  .q .n{font-family:var(--mono);font-size:.72rem;color:var(--mustard);
-    margin-right:.5rem}
+  html[lang="en"] .q .gloss{display:none}
+  .q .n{font-family:var(--mono);font-size:.72rem;color:var(--mustard);margin-right:.5rem}
   .q .hint{display:block;font-size:.82rem;color:var(--slate);margin-top:.35rem}
   textarea,input[type=text]{
     width:100%;font-family:var(--body);font-size:.95rem;color:var(--ink);
     background:var(--card);border:1px solid var(--rule);border-radius:2px;
     padding:.7rem .8rem;line-height:1.55;resize:vertical}
   textarea{min-height:4.5rem}
-  textarea:focus,input:focus{outline:2px solid var(--petrol);outline-offset:1px;
-    border-color:var(--petrol)}
+  textarea:focus,input:focus,button:focus-visible{outline:2px solid var(--petrol);
+    outline-offset:1px;border-color:var(--petrol)}
   .stage-intro{margin:3rem 0 1rem;padding-top:1.5rem;border-top:2px solid var(--petrol)}
   .stage-intro h2{font-family:var(--display);font-size:1.25rem;color:var(--petrol);margin:0 0 .3rem}
   .stage-intro p{margin:0;color:var(--slate);font-size:.92rem}
@@ -62,16 +67,15 @@
   summary::before{content:"+";font-family:var(--mono);color:var(--mustard);font-weight:500;flex:none}
   details[open] summary::before{content:"–"}
   summary .cnt{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--slate);font-weight:400}
-  summary .lbl-en{font-weight:400;font-size:.8rem;color:var(--slate);font-style:italic}
   .stage-body{padding:.4rem 1rem 1rem}
   .who{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:2.5rem 0 1.6rem}
   @media(max-width:520px){.who{grid-template-columns:1fr}}
   .who label{display:block;font-size:.8rem;color:var(--slate);margin-bottom:.3rem}
   .actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.9rem}
-  button{font-family:var(--body);font-size:.95rem;font-weight:600;color:#FBFAF7;
+  .actions button{font-family:var(--body);font-size:.95rem;font-weight:600;color:#FBFAF7;
     background:var(--petrol);border:0;border-radius:2px;padding:.75rem 1.4rem;cursor:pointer}
-  button.ghost{background:transparent;color:var(--petrol);border:1px solid var(--petrol)}
-  button:hover{opacity:.9}
+  .actions button.ghost{background:transparent;color:var(--petrol);border:1px solid var(--petrol)}
+  .actions button:hover{opacity:.9}
   .status{font-size:.88rem;color:var(--slate);min-height:1.3em}
   .status.good{color:var(--petrol);font-weight:600}
   .saved-note{font-family:var(--mono);font-size:.72rem;color:var(--slate);margin-top:1.5rem}
@@ -81,170 +85,171 @@
 </head>
 <body>
 <div class="wrap">
-  <p class="eyebrow">Life Atlas · Coordinación deportiva</p>
-  <h1>Seis preguntas</h1>
-  <p class="sub">Cómo trabajas hoy, antes de que exista la plataforma</p>
-  <p class="lede">Contesta lo que sepas. Lo que no sepas también sirve &mdash; dice
-  dónde hay que mirar. Con las seis primeras alcanza; lo demás está abajo por
-  etapas, por si hay tiempo.</p>
+  <div class="topbar">
+    <div class="langs" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
 
-  <p class="privacy"><strong>Tus respuestas no salen de este navegador.</strong>
-  Esta página no envía nada a ningún servidor. Se guardan en tu propio equipo
-  mientras escribes, así que puedes cerrar y volver. Cuando termines, tú decides
-  si las copias o las mandas por correo.</p>
+  <p class="eyebrow" data-en="Life Atlas · Sports coordination">Life Atlas · Coordinación deportiva</p>
+  <h1 data-en="Six questions">Seis preguntas</h1>
+  <p class="sub" data-en="How you work today, before the platform exists">Cómo trabajas hoy, antes de que exista la plataforma</p>
+  <p class="lede" data-en="Answer what you know. What you do not know is just as useful — it says where to look. The first six are enough; everything else is below in optional stages.">Contesta lo que sepas. Lo que no sepas también sirve &mdash; dice dónde hay que mirar. Con las seis primeras alcanza; lo demás está abajo por etapas, por si hay tiempo.</p>
+
+  <p class="privacy"><strong data-en="Your answers never leave this browser.">Tus respuestas no salen de este navegador.</strong>
+  <span data-en=" This page sends nothing to any server. Answers are kept on your own device as you type, so you can close the tab and come back. When you are done, you decide whether to copy them or send them by email."> Esta página no envía nada a ningún servidor. Se guardan en tu propio equipo mientras escribes, así que puedes cerrar y volver. Cuando termines, tú decides si las copias o las mandas por correo.</span></p>
 
   <div id="questions">
     <div class="q">
-      <label for="q1"><span class="n">1</span>¿Qué tiene que ser cierto dentro de un año para decir que salió bien?</label>
-      <span class="en">What has to be true a year from now to call this a success?</span>
-      <textarea id="q1" data-label="Un año — qué tiene que ser cierto"></textarea>
+      <label for="q1"><span class="n">1</span><span data-en="What has to be true a year from now to call this a success?">¿Qué tiene que ser cierto dentro de un año para decir que salió bien?</span></label>
+      <span class="gloss">What has to be true a year from now to call this a success?</span>
+      <textarea id="q1" data-label="Un año — qué tiene que ser cierto" data-label-en="One year — what has to be true"></textarea>
     </div>
     <div class="q">
-      <label for="q2"><span class="n">2</span>Presupuesto y contratación: ¿cómo se asignan hoy los recursos, y quién administra los convenios?</label>
-      <span class="en">Budget and contracting: how are resources allocated today, and who administers the agreements?</span>
-      <textarea id="q2" data-label="Presupuesto y contratación"></textarea>
+      <label for="q2"><span class="n">2</span><span data-en="Budget and contracting: how are resources allocated today, and who administers the agreements?">Presupuesto y contratación: ¿cómo se asignan hoy los recursos, y quién administra los convenios?</span></label>
+      <span class="gloss">Budget and contracting: how are resources allocated today, and who administers the agreements?</span>
+      <textarea id="q2" data-label="Presupuesto y contratación" data-label-en="Budget and contracting"></textarea>
     </div>
     <div class="q">
-      <label for="q3"><span class="n">3</span>¿Quién decide qué, y quién convoca la reunión formal?</label>
-      <span class="en">Who decides what, and who convenes the formal meeting?</span>
-      <textarea id="q3" data-label="Quién decide, quién convoca"></textarea>
+      <label for="q3"><span class="n">3</span><span data-en="Who decides what, and who convenes the formal meeting?">¿Quién decide qué, y quién convoca la reunión formal?</span></label>
+      <span class="gloss">Who decides what, and who convenes the formal meeting?</span>
+      <textarea id="q3" data-label="Quién decide, quién convoca" data-label-en="Who decides, who convenes"></textarea>
     </div>
     <div class="q">
-      <label for="q4"><span class="n">4</span>El centro: ¿qué mandato tiene, de quién depende, y cuál es el cronograma real?</label>
-      <span class="en">The centre: what is its mandate, who does it report to, and what is the real timeline?</span>
-      <textarea id="q4" data-label="El centro — mandato y cronograma"></textarea>
+      <label for="q4"><span class="n">4</span><span data-en="The centre: what is its mandate, who does it report to, and what is the real timeline?">El centro: ¿qué mandato tiene, de quién depende, y cuál es el cronograma real?</span></label>
+      <span class="gloss">The centre: what is its mandate, who does it report to, and what is the real timeline?</span>
+      <textarea id="q4" data-label="El centro — mandato y cronograma" data-label-en="The centre — mandate and timeline"></textarea>
     </div>
     <div class="q">
-      <label for="q5"><span class="n">5</span>¿Qué se mide hoy para decidir si un deportista está listo para competir, y quién toma esa decisión?</label>
-      <span class="en">What is measured today to decide whether an athlete is ready to compete, and who makes that call?</span>
-      <textarea id="q5" data-label="Listo para competir — qué se mide, quién decide"></textarea>
+      <label for="q5"><span class="n">5</span><span data-en="What is measured today to decide whether an athlete is ready to compete, and who makes that call?">¿Qué se mide hoy para decidir si un deportista está listo para competir, y quién toma esa decisión?</span></label>
+      <span class="gloss">What is measured today to decide whether an athlete is ready to compete, and who makes that call?</span>
+      <textarea id="q5" data-label="Listo para competir — qué se mide, quién decide" data-label-en="Ready to compete — what is measured, who decides"></textarea>
     </div>
     <div class="q">
-      <label for="q6"><span class="n">6</span>Con menores de edad: ¿quién autoriza hoy que se recoja información, y cómo queda registrado ese permiso?</label>
-      <span class="en">With minors: who authorises data collection today, and how is that permission recorded?</span>
-      <textarea id="q6" data-label="Menores — quién autoriza"></textarea>
+      <label for="q6"><span class="n">6</span><span data-en="With minors: who authorises data collection today, and how is that permission recorded?">Con menores de edad: ¿quién autoriza hoy que se recoja información, y cómo queda registrado ese permiso?</span></label>
+      <span class="gloss">With minors: who authorises data collection today, and how is that permission recorded?</span>
+      <textarea id="q6" data-label="Menores — quién autoriza" data-label-en="Minors — who authorises"></textarea>
     </div>
 
     <div class="stage-intro">
-      <h2>Si hay tiempo</h2>
-      <p>Siete etapas más, cada una de tres o cuatro preguntas. Abre las que quieras
-      y deja el resto cerrado. Nada de esto es obligatorio.</p>
+      <h2 data-en="If there is time">Si hay tiempo</h2>
+      <p data-en="Seven more stages, three or four questions each. Open the ones you want and leave the rest closed. None of this is required.">Siete etapas más, cada una de tres o cuatro preguntas. Abre las que quieras y deja el resto cerrado. Nada de esto es obligatorio.</p>
     </div>
 
     <details>
-      <summary>Etapa 2 &mdash; La institución <span class="lbl-en">The institution</span><span class="cnt">4</span></summary>
+      <summary><span data-en="Stage 2 — The institution">Etapa 2 &mdash; La institución</span><span class="cnt">4</span></summary>
       <div class="stage-body">
-        <div class="q"><label for="q7">Subvenciones: ¿qué fondos (departamentales, nacionales, internacionales) existen para deporte, salud mental y bienestar?</label>
-          <textarea id="q7" data-label="Subvenciones y fondos"></textarea></div>
-        <div class="q"><label for="q8">El cargo: ¿qué abarca la posición, qué se puede decidir directamente, y qué requiere aprobación de otros?</label>
-          <textarea id="q8" data-label="El cargo — alcance y autoridad"></textarea></div>
-        <div class="q"><label for="q9">Programa deportivo: ¿qué disciplinas, cuántos deportistas activos por disciplina, qué calendario de eventos?</label>
-          <textarea id="q9" data-label="Programa deportivo"></textarea></div>
-        <div class="q"><label for="q10">Infraestructura digital: ¿conectividad, dispositivos disponibles, puntos de acceso para deportistas y familias?</label>
-          <textarea id="q10" data-label="Infraestructura digital"></textarea></div>
+        <div class="q"><label for="q7" data-en="Grants: which funds (departmental, national, international) exist for sport, mental health and wellbeing?">Subvenciones: ¿qué fondos (departamentales, nacionales, internacionales) existen para deporte, salud mental y bienestar?</label>
+          <textarea id="q7" data-label="Subvenciones y fondos" data-label-en="Grants and funds"></textarea></div>
+        <div class="q"><label for="q8" data-en="The role: what does the position cover, what can be decided directly, and what needs others' approval?">El cargo: ¿qué abarca la posición, qué se puede decidir directamente, y qué requiere aprobación de otros?</label>
+          <textarea id="q8" data-label="El cargo — alcance y autoridad" data-label-en="The role — scope and authority"></textarea></div>
+        <div class="q"><label for="q9" data-en="Sports programme: which disciplines, how many active athletes per discipline, what event calendar?">Programa deportivo: ¿qué disciplinas, cuántos deportistas activos por disciplina, qué calendario de eventos?</label>
+          <textarea id="q9" data-label="Programa deportivo" data-label-en="Sports programme"></textarea></div>
+        <div class="q"><label for="q10" data-en="Digital infrastructure: connectivity, available devices, access points for athletes and families?">Infraestructura digital: ¿conectividad, dispositivos disponibles, puntos de acceso para deportistas y familias?</label>
+          <textarea id="q10" data-label="Infraestructura digital" data-label-en="Digital infrastructure"></textarea></div>
       </div>
     </details>
 
     <details>
-      <summary>Etapa 3 &mdash; Las decisiones del día a día <span class="lbl-en">Daily decisions</span><span class="cnt">4</span></summary>
+      <summary><span data-en="Stage 3 — Daily decisions">Etapa 3 &mdash; Las decisiones del día a día</span><span class="cnt">4</span></summary>
       <div class="stage-body">
-        <div class="q"><label for="q11">¿Qué se espera los primeros cuatro meses, y qué al cabo de un año?</label>
-          <span class="hint">Si las dos respuestas son distintas, esa diferencia dice mucho.</span>
-          <textarea id="q11" data-label="Cuatro meses contra un año"></textarea></div>
-        <div class="q"><label for="q12">Las tres decisiones que se toman con más frecuencia sobre un deportista, y cada cuánto &mdash; diario, semanal, por concentración.</label>
-          <textarea id="q12" data-label="Las tres decisiones más frecuentes"></textarea></div>
-        <div class="q"><label for="q13">¿Cuál de esas se toma hoy con menos información de la que se quisiera?</label>
-          <span class="hint">Si hay una que quita el sueño, esa.</span>
-          <textarea id="q13" data-label="La decisión con menos información"></textarea></div>
-        <div class="q"><label for="q14">Cuando se recomienda algo &mdash; carga, descanso, apoyo psicológico &mdash; ¿quién tiene que estar de acuerdo antes de que se aplique?</label>
-          <textarea id="q14" data-label="Quién debe aprobar una recomendación"></textarea></div>
+        <div class="q"><label for="q11" data-en="What is expected in the first four months, and what after a year?">¿Qué se espera los primeros cuatro meses, y qué al cabo de un año?</label>
+          <span class="hint" data-en="If those two answers differ, the gap itself says a lot.">Si las dos respuestas son distintas, esa diferencia dice mucho.</span>
+          <textarea id="q11" data-label="Cuatro meses contra un año" data-label-en="Four months versus a year"></textarea></div>
+        <div class="q"><label for="q12" data-en="The three decisions made most often about an athlete, and how often — daily, weekly, per camp.">Las tres decisiones que se toman con más frecuencia sobre un deportista, y cada cuánto &mdash; diario, semanal, por concentración.</label>
+          <textarea id="q12" data-label="Las tres decisiones más frecuentes" data-label-en="The three most frequent decisions"></textarea></div>
+        <div class="q"><label for="q13" data-en="Which of those is made with less information than you would like?">¿Cuál de esas se toma hoy con menos información de la que se quisiera?</label>
+          <span class="hint" data-en="If one of them keeps you awake, that one.">Si hay una que quita el sueño, esa.</span>
+          <textarea id="q13" data-label="La decisión con menos información" data-label-en="The decision with least information"></textarea></div>
+        <div class="q"><label for="q14" data-en="When something is recommended — load, rest, psychological support — who has to agree before it happens?">Cuando se recomienda algo &mdash; carga, descanso, apoyo psicológico &mdash; ¿quién tiene que estar de acuerdo antes de que se aplique?</label>
+          <textarea id="q14" data-label="Quién debe aprobar una recomendación" data-label-en="Who must approve a recommendation"></textarea></div>
       </div>
     </details>
 
     <details>
-      <summary>Etapa 4 &mdash; Lo que ya se sabe ver <span class="lbl-en">Tacit judgement</span><span class="cnt">3</span></summary>
+      <summary><span data-en="Stage 4 — Tacit judgement">Etapa 4 &mdash; Lo que ya se sabe ver</span><span class="cnt">3</span></summary>
       <div class="stage-body">
-        <div class="q"><label for="q15">¿Qué se ve en un deportista que no aparece en ningún formulario? Lo que se sabe por experiencia y nadie ha escrito nunca.</label>
-          <textarea id="q15" data-label="Lo que se ve y nadie escribe"></textarea></div>
-        <div class="q"><label for="q16">¿Cómo se usan hoy DISC y VAK en la práctica? No la teoría &mdash; el momento concreto en que se mira el perfil y se cambia algo por lo que dice.</label>
-          <textarea id="q16" data-label="DISC y VAK en la práctica"></textarea></div>
-        <div class="q"><label for="q17">¿Qué señal temprana ha hecho acertar antes? ¿Y cuál ha engañado?</label>
-          <textarea id="q17" data-label="Señales tempranas — aciertos y engaños"></textarea></div>
+        <div class="q"><label for="q15" data-en="What do you see in an athlete that appears on no form anywhere? What you know from experience and nobody has ever written down.">¿Qué se ve en un deportista que no aparece en ningún formulario? Lo que se sabe por experiencia y nadie ha escrito nunca.</label>
+          <textarea id="q15" data-label="Lo que se ve y nadie escribe" data-label-en="What you see that nobody writes down"></textarea></div>
+        <div class="q"><label for="q16" data-en="How are DISC and VAK used in practice? Not the theory — the concrete moment when you look at a profile and change something because of it.">¿Cómo se usan hoy DISC y VAK en la práctica? No la teoría &mdash; el momento concreto en que se mira el perfil y se cambia algo por lo que dice.</label>
+          <textarea id="q16" data-label="DISC y VAK en la práctica" data-label-en="DISC and VAK in practice"></textarea></div>
+        <div class="q"><label for="q17" data-en="Which early signal has proved you right before? And which one has misled you?">¿Qué señal temprana ha hecho acertar antes? ¿Y cuál ha engañado?</label>
+          <textarea id="q17" data-label="Señales tempranas — aciertos y engaños" data-label-en="Early signals — right and misleading"></textarea></div>
       </div>
     </details>
 
     <details>
-      <summary>Etapa 5 &mdash; Cómo se captura hoy <span class="lbl-en">How it is captured today</span><span class="cnt">4</span></summary>
+      <summary><span data-en="Stage 5 — How it is captured today">Etapa 5 &mdash; Cómo se captura hoy</span><span class="cnt">4</span></summary>
       <div class="stage-body">
-        <div class="q"><label for="q18">¿Qué formularios, tests o cuestionarios se usan hoy?</label>
-          <span class="hint">Descríbelos aquí y mándalos por correo aunque estén a medias, en papel o en un Excel desordenado. El desorden es información, no un problema.</span>
-          <textarea id="q18" data-label="Formularios y tests actuales"></textarea></div>
-        <div class="q"><label for="q19">¿Cuánto tiempo a la semana se pasa moviendo datos de un lado a otro &mdash; transcribiendo, copiando, resumiendo para alguien más?</label>
-          <textarea id="q19" data-label="Tiempo moviendo datos"></textarea></div>
-        <div class="q"><label for="q20">¿Por dónde llega hoy la información de un deportista? Correo, WhatsApp, conversación en el campo, informe del médico.</label>
-          <textarea id="q20" data-label="Canales de entrada"></textarea></div>
-        <div class="q"><label for="q21">¿Qué pasa con esa información cuando un deportista cambia de categoría, o cuando quien la tiene no está?</label>
-          <textarea id="q21" data-label="Qué pasa en las transiciones"></textarea></div>
+        <div class="q"><label for="q18" data-en="Which forms, tests or questionnaires are used today?">¿Qué formularios, tests o cuestionarios se usan hoy?</label>
+          <span class="hint" data-en="Describe them here and send them by email even if half-finished, on paper, or in a messy spreadsheet. The mess is information, not a problem.">Descríbelos aquí y mándalos por correo aunque estén a medias, en papel o en un Excel desordenado. El desorden es información, no un problema.</span>
+          <textarea id="q18" data-label="Formularios y tests actuales" data-label-en="Current forms and tests"></textarea></div>
+        <div class="q"><label for="q19" data-en="How many hours a week go into moving data around — transcribing, copying, summarising for someone else?">¿Cuánto tiempo a la semana se pasa moviendo datos de un lado a otro &mdash; transcribiendo, copiando, resumiendo para alguien más?</label>
+          <textarea id="q19" data-label="Tiempo moviendo datos" data-label-en="Time spent moving data"></textarea></div>
+        <div class="q"><label for="q20" data-en="Through which channels does an athlete's information reach you? Email, WhatsApp, a conversation on the pitch, a doctor's note.">¿Por dónde llega hoy la información de un deportista? Correo, WhatsApp, conversación en el campo, informe del médico.</label>
+          <textarea id="q20" data-label="Canales de entrada" data-label-en="Inbound channels"></textarea></div>
+        <div class="q"><label for="q21" data-en="What happens to that information when an athlete moves up an age group, or when whoever holds it is away?">¿Qué pasa con esa información cuando un deportista cambia de categoría, o cuando quien la tiene no está?</label>
+          <textarea id="q21" data-label="Qué pasa en las transiciones" data-label-en="What happens at transitions"></textarea></div>
       </div>
     </details>
 
     <details>
-      <summary>Etapa 6 &mdash; Los datos que ya existen <span class="lbl-en">Data that already exists</span><span class="cnt">3</span></summary>
+      <summary><span data-en="Stage 6 — Data that already exists">Etapa 6 &mdash; Los datos que ya existen</span><span class="cnt">3</span></summary>
       <div class="stage-body">
-        <div class="q"><label for="q22">Los chalecos y sensores que ya existen: ¿quién los opera, quién recibe la salida, y alguien la usa para decidir algo?</label>
-          <textarea id="q22" data-label="Sensores existentes"></textarea></div>
-        <div class="q"><label for="q23">¿Los deportistas usan reloj, banda o app por su cuenta? ¿Cuáles, y llega algo de eso a ustedes?</label>
-          <textarea id="q23" data-label="Wearables propios"></textarea></div>
-        <div class="q"><label for="q24">En edades de 13 a 17: ¿qué se registra hoy sobre crecimiento &mdash; estatura, peso, fecha de medición?</label>
-          <span class="hint">Un marco de puerta y una báscula bastan. A esa edad el crecimiento explica más que casi cualquier sensor.</span>
-          <textarea id="q24" data-label="Crecimiento en 13–17"></textarea></div>
+        <div class="q"><label for="q22" data-en="The vests and sensors that already exist: who operates them, who receives the output, and does anyone use it to decide anything?">Los chalecos y sensores que ya existen: ¿quién los opera, quién recibe la salida, y alguien la usa para decidir algo?</label>
+          <textarea id="q22" data-label="Sensores existentes" data-label-en="Existing sensors"></textarea></div>
+        <div class="q"><label for="q23" data-en="Do athletes use a watch, band or app of their own? Which ones, and does any of it reach you?">¿Los deportistas usan reloj, banda o app por su cuenta? ¿Cuáles, y llega algo de eso a ustedes?</label>
+          <textarea id="q23" data-label="Wearables propios" data-label-en="Athletes' own wearables"></textarea></div>
+        <div class="q"><label for="q24" data-en="For ages 13 to 17: what is recorded today about growth — height, weight, date measured?">En edades de 13 a 17: ¿qué se registra hoy sobre crecimiento &mdash; estatura, peso, fecha de medición?</label>
+          <span class="hint" data-en="A door frame and a bathroom scale are enough. At that age growth explains more than almost any sensor.">Un marco de puerta y una báscula bastan. A esa edad el crecimiento explica más que casi cualquier sensor.</span>
+          <textarea id="q24" data-label="Crecimiento en 13–17" data-label-en="Growth at ages 13–17"></textarea></div>
       </div>
     </details>
 
     <details>
-      <summary>Etapa 7 &mdash; Quién es quién <span class="lbl-en">Who is who</span><span class="cnt">3</span></summary>
+      <summary><span data-en="Stage 7 — Who is who">Etapa 7 &mdash; Quién es quién</span><span class="cnt">3</span></summary>
       <div class="stage-body">
-        <div class="q"><label for="q25">¿Quién está alrededor de un deportista &mdash; entrenador, preparador físico, médico, fisioterapeuta, la familia? ¿Quién le reporta a quién?</label>
-          <textarea id="q25" data-label="Quién rodea al deportista"></textarea></div>
-        <div class="q"><label for="q26">¿Cuántos deportistas en total, y cuántos se ven personalmente en una semana normal?</label>
-          <textarea id="q26" data-label="Cuántos deportistas"></textarea></div>
-        <div class="q"><label for="q27">¿Hay alguien de fuera que opine sobre un deportista &mdash; un especialista, un club, una universidad en el exterior?</label>
-          <textarea id="q27" data-label="Opiniones externas"></textarea></div>
+        <div class="q"><label for="q25" data-en="Who surrounds an athlete — coach, fitness coach, doctor, physio, the family? Who reports to whom?">¿Quién está alrededor de un deportista &mdash; entrenador, preparador físico, médico, fisioterapeuta, la familia? ¿Quién le reporta a quién?</label>
+          <textarea id="q25" data-label="Quién rodea al deportista" data-label-en="Who surrounds the athlete"></textarea></div>
+        <div class="q"><label for="q26" data-en="How many athletes in total, and how many do you personally see in a normal week?">¿Cuántos deportistas en total, y cuántos se ven personalmente en una semana normal?</label>
+          <textarea id="q26" data-label="Cuántos deportistas" data-label-en="How many athletes"></textarea></div>
+        <div class="q"><label for="q27" data-en="Is there anyone outside who weighs in on an athlete — a specialist, a club, a university abroad?">¿Hay alguien de fuera que opine sobre un deportista &mdash; un especialista, un club, una universidad en el exterior?</label>
+          <textarea id="q27" data-label="Opiniones externas" data-label-en="Outside opinions"></textarea></div>
       </div>
     </details>
 
     <details>
-      <summary>Etapa 8 &mdash; Los límites <span class="lbl-en">Boundaries</span><span class="cnt">3</span></summary>
+      <summary><span data-en="Stage 8 — Boundaries">Etapa 8 &mdash; Los límites</span><span class="cnt">3</span></summary>
       <div class="stage-body">
-        <div class="q"><label for="q28">¿Qué información sobre un deportista <em>no</em> debería ver un entrenador? ¿Y un deportista sobre otro?</label>
-          <textarea id="q28" data-label="Qué no debe ver quién"></textarea></div>
-        <div class="q"><label for="q29">Si un deportista o su familia pidiera ver todo lo que hay registrado sobre él, ¿se podría hoy? ¿Y borrarlo?</label>
-          <textarea id="q29" data-label="Acceso y borrado"></textarea></div>
-        <div class="q"><label for="q30">¿Hay algo que se exija por contrato o por reglamento sobre datos de los deportistas que deba conocerse antes de proponer nada?</label>
-          <textarea id="q30" data-label="Exigencias contractuales o de reglamento"></textarea></div>
+        <div class="q"><label for="q28" data-en="What information about an athlete should a coach not see? And one athlete about another?">¿Qué información sobre un deportista <em>no</em> debería ver un entrenador? ¿Y un deportista sobre otro?</label>
+          <textarea id="q28" data-label="Qué no debe ver quién" data-label-en="What should not be seen, and by whom"></textarea></div>
+        <div class="q"><label for="q29" data-en="If an athlete or their family asked to see everything recorded about them, could that happen today? And could it be deleted?">Si un deportista o su familia pidiera ver todo lo que hay registrado sobre él, ¿se podría hoy? ¿Y borrarlo?</label>
+          <textarea id="q29" data-label="Acceso y borrado" data-label-en="Access and erasure"></textarea></div>
+        <div class="q"><label for="q30" data-en="Is anything required by contract or regulation about athlete data that should be known before anything is proposed?">¿Hay algo que se exija por contrato o por reglamento sobre datos de los deportistas que deba conocerse antes de proponer nada?</label>
+          <textarea id="q30" data-label="Exigencias contractuales o de reglamento" data-label-en="Contractual or regulatory requirements"></textarea></div>
       </div>
     </details>
   </div>
 
   <div class="who">
-    <div><label for="who-name">Nombre / Name</label><input type="text" id="who-name"></div>
-    <div><label for="who-role">Rol / Role</label><input type="text" id="who-role"></div>
+    <div><label for="who-name" data-en="Name">Nombre / Name</label><input type="text" id="who-name"></div>
+    <div><label for="who-role" data-en="Role">Rol / Role</label><input type="text" id="who-role"></div>
   </div>
 
   <div class="actions">
-    <button id="copy" type="button">Copiar todo</button>
-    <button id="mail" class="ghost" type="button">Abrir en el correo</button>
-    <button id="download" class="ghost" type="button">Descargar</button>
-    <button id="clear" class="ghost" type="button">Borrar</button>
+    <button id="copy" type="button" data-en="Copy everything">Copiar todo</button>
+    <button id="mail" class="ghost" type="button" data-en="Open in email">Abrir en el correo</button>
+    <button id="download" class="ghost" type="button" data-en="Download">Descargar</button>
+    <button id="clear" class="ghost" type="button" data-en="Clear">Borrar</button>
   </div>
   <p class="status" id="status"></p>
   <p class="saved-note" id="saved-note"></p>
 
   <footer>
-    Copia el texto y mándalo por correo o WhatsApp a
-    <a href="mailto:ceo@winniio.io">ceo@winniio.io</a>. Con lo que llegue armo la
-    propuesta: qué hace la plataforma el primer mes, qué no hace todavía, y quién
-    decide qué.
+    <span data-en="Copy the text and send it by email or WhatsApp to">Copia el texto y mándalo por correo o WhatsApp a</span>
+    <a href="mailto:ceo@winniio.io">ceo@winniio.io</a>.
+    <span data-en="From your answers I will build the proposal: what the platform does in the first month, what it does not do yet, and who decides what.">Con lo que llegue armo la propuesta: qué hace la plataforma el primer mes, qué no hace todavía, y quién decide qué.</span>
   </footer>
 </div>
 
@@ -252,6 +257,7 @@
 (function () {
   "use strict";
   var KEY = "la-seis-preguntas:v1";
+  var LANG_KEY = "la-seis-preguntas:lang";
   var TO = "ceo@winniio.io";
 
   var fields = Array.prototype.slice.call(document.querySelectorAll("#questions textarea[id]"));
@@ -259,26 +265,91 @@
   var roleEl = document.getElementById("who-role");
   var statusEl = document.getElementById("status");
   var savedNote = document.getElementById("saved-note");
+  var lang = "es";
+
+  // ---- language ----------------------------------------------------------
+  // Spanish is the markup itself, so the page reads correctly with no script
+  // at all. English lives in data-en and is swapped in on request; the
+  // original Spanish is stashed on first swap so the toggle works both ways.
+  var swappable = Array.prototype.slice.call(document.querySelectorAll("[data-en]"));
+
+  var UI = {
+    es: {
+      needOne: "Escribe al menos una respuesta.",
+      copied: "Copiado. Pégalo en un correo o WhatsApp a " + TO,
+      copyFail: "No se pudo copiar. Usa Descargar.",
+      mailLong: "Son muchas respuestas para abrir el correo directamente. Usa Copiar todo o Descargar.",
+      mailOpen: "Abriendo tu correo…",
+      downloaded: "Descargado. Adjúntalo en un correo a " + TO,
+      cleared: "Borrado.",
+      noStore: "Este navegador no permite guardar. Copia el texto antes de cerrar.",
+      savedFmt: function (n, t) { return "Guardado en este navegador · " + n + " de " + t + " respuestas"; },
+      restoredFmt: function (n) { return "Recuperamos " + n + " respuesta" + (n === 1 ? "" : "s") + " de la última vez."; },
+      docTitle: "Seis preguntas · Life Atlas",
+      fileHeading: "Seis preguntas — Life Atlas"
+    },
+    en: {
+      needOne: "Write at least one answer.",
+      copied: "Copied. Paste it into an email or WhatsApp to " + TO,
+      copyFail: "Could not copy. Use Download instead.",
+      mailLong: "Too many answers to open the mail client directly. Use Copy everything or Download.",
+      mailOpen: "Opening your email…",
+      downloaded: "Downloaded. Attach it to an email to " + TO,
+      cleared: "Cleared.",
+      noStore: "This browser will not store anything. Copy the text before closing.",
+      savedFmt: function (n, t) { return "Saved in this browser · " + n + " of " + t + " answers"; },
+      restoredFmt: function (n) { return "Restored " + n + " answer" + (n === 1 ? "" : "s") + " from last time."; },
+      docTitle: "Six questions · Life Atlas",
+      fileHeading: "Six questions — Life Atlas"
+    }
+  };
+
+  function setLang(next) {
+    lang = next === "en" ? "en" : "es";
+    swappable.forEach(function (el) {
+      if (!el.hasAttribute("data-es")) el.setAttribute("data-es", el.innerHTML);
+      el.innerHTML = el.getAttribute(lang === "en" ? "data-en" : "data-es");
+    });
+    document.documentElement.lang = lang;
+    document.title = UI[lang].docTitle;
+    Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang));
+    });
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    refreshNote();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".langs button"), function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+  });
 
   function say(msg, good) {
     statusEl.textContent = msg;
     statusEl.className = good ? "status good" : "status";
   }
 
+  function filled() { return fields.filter(function (t) { return t.value.trim(); }); }
+
+  function refreshNote() {
+    if (savedNote.dataset.blocked === "1") { savedNote.textContent = UI[lang].noStore; return; }
+    if (savedNote.dataset.shown === "1") {
+      savedNote.textContent = UI[lang].savedFmt(filled().length, fields.length);
+    }
+  }
+
   // ---- local persistence -------------------------------------------------
-  // Storage can throw outright in some contexts (private windows, blocked
-  // site data), so every read and write is guarded and the page works with
-  // no stored value at all.
+  // Storage can throw outright in some contexts (private windows, blocked site
+  // data), so every read and write is guarded and the page works with none.
   function save() {
     var data = { name: nameEl.value, role: roleEl.value, when: new Date().toISOString(), a: {} };
     fields.forEach(function (t) { if (t.value.trim()) data.a[t.id] = t.value; });
     try {
       localStorage.setItem(KEY, JSON.stringify(data));
-      savedNote.textContent = "Guardado en este navegador · " +
-        Object.keys(data.a).length + " de " + fields.length + " respuestas";
+      savedNote.dataset.shown = "1"; delete savedNote.dataset.blocked;
     } catch (e) {
-      savedNote.textContent = "Este navegador no permite guardar. Copia el texto antes de cerrar.";
+      savedNote.dataset.blocked = "1";
     }
+    refreshNote();
   }
 
   function restore() {
@@ -297,92 +368,94 @@
       }
     });
     if (n) {
-      say("Recuperamos " + n + " respuesta" + (n === 1 ? "" : "s") + " de la última vez.", true);
-      savedNote.textContent = "Guardado en este navegador · " + n + " de " + fields.length + " respuestas";
+      say(UI[lang].restoredFmt(n), true);
+      savedNote.dataset.shown = "1";
+      refreshNote();
     }
   }
 
   var timer = null;
-  function scheduleSave() { clearTimeout(timer); timer = setTimeout(save, 600); }
   fields.concat([nameEl, roleEl]).forEach(function (el) {
-    el.addEventListener("input", scheduleSave);
+    el.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(save, 600); });
   });
 
   // ---- output ------------------------------------------------------------
   function asText() {
-    var out = ["Seis preguntas — Life Atlas", ""];
+    var picked = filled();
+    if (!picked.length) return null;
+    var out = [UI[lang].fileHeading, ""];
     var who = nameEl.value.trim();
     if (roleEl.value.trim()) who += (who ? " · " : "") + roleEl.value.trim();
     if (who) out.push(who);
     out.push(new Date().toISOString().slice(0, 10), "");
-    var n = 0;
-    fields.forEach(function (t) {
-      var v = t.value.trim();
-      if (!v) return;
-      n++;
-      out.push(t.getAttribute("data-label"), v, "");
+    picked.forEach(function (t) {
+      var key = lang === "en" ? "data-label-en" : "data-label";
+      out.push(t.getAttribute(key) || t.getAttribute("data-label"), t.value.trim(), "");
     });
-    if (!n) return null;
     return out.join("\n");
   }
 
   document.getElementById("copy").addEventListener("click", function () {
     var text = asText();
-    if (!text) { say("Escribe al menos una respuesta.", false); return; }
+    if (!text) { say(UI[lang].needOne, false); return; }
     function fallback() {
-      // execCommand is deprecated but is the only path on pages served
-      // without a secure context or where the clipboard permission is denied.
+      // execCommand is deprecated but is the only path where the async
+      // clipboard API is unavailable or its permission is denied.
       var ta = document.createElement("textarea");
       ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
       document.body.appendChild(ta); ta.select();
       var ok = false;
       try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
       document.body.removeChild(ta);
-      say(ok ? "Copiado. Pégalo en un correo o WhatsApp a " + TO
-             : "No se pudo copiar. Usa Descargar.", ok);
+      say(ok ? UI[lang].copied : UI[lang].copyFail, ok);
     }
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(function () {
-        say("Copiado. Pégalo en un correo o WhatsApp a " + TO, true);
-      }, fallback);
+      navigator.clipboard.writeText(text).then(function () { say(UI[lang].copied, true); }, fallback);
     } else { fallback(); }
   });
 
   document.getElementById("mail").addEventListener("click", function () {
     var text = asText();
-    if (!text) { say("Escribe al menos una respuesta.", false); return; }
-    var href = "mailto:" + TO + "?subject=" + encodeURIComponent("Seis preguntas — respuestas") +
+    if (!text) { say(UI[lang].needOne, false); return; }
+    var subject = lang === "en" ? "Six questions — answers" : "Seis preguntas — respuestas";
+    var href = "mailto:" + TO + "?subject=" + encodeURIComponent(subject) +
                "&body=" + encodeURIComponent(text);
     // Mail clients truncate very long mailto bodies. Say so rather than let
     // answers disappear silently between the page and the draft.
-    if (href.length > 1800) {
-      say("Son muchas respuestas para abrir el correo directamente. Usa Copiar todo o Descargar.", false);
-      return;
-    }
+    if (href.length > 1800) { say(UI[lang].mailLong, false); return; }
     window.location.href = href;
-    say("Abriendo tu correo…", true);
+    say(UI[lang].mailOpen, true);
   });
 
   document.getElementById("download").addEventListener("click", function () {
     var text = asText();
-    if (!text) { say("Escribe al menos una respuesta.", false); return; }
+    if (!text) { say(UI[lang].needOne, false); return; }
     var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "seis-preguntas.txt";
+    a.download = lang === "en" ? "six-questions.txt" : "seis-preguntas.txt";
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
-    say("Descargado. Adjúntalo en un correo a " + TO, true);
+    say(UI[lang].downloaded, true);
   });
 
   document.getElementById("clear").addEventListener("click", function () {
     fields.forEach(function (t) { t.value = ""; });
     nameEl.value = ""; roleEl.value = "";
     try { localStorage.removeItem(KEY); } catch (e) {}
-    savedNote.textContent = "";
-    say("Borrado.", false);
+    delete savedNote.dataset.shown; savedNote.textContent = "";
+    say(UI[lang].cleared, false);
   });
 
+  // A stored choice wins; otherwise a browser with no Spanish preference
+  // opens in English. Spanish stays the default everywhere else.
+  var start = null;
+  try { start = localStorage.getItem(LANG_KEY); } catch (e) {}
+  if (start !== "es" && start !== "en") {
+    var prefs = (navigator.languages || [navigator.language || "es"]).join(",").toLowerCase();
+    start = prefs.indexOf("es") === -1 ? "en" : "es";
+  }
+  setLang(start);
   restore();
 })();
 </script>
